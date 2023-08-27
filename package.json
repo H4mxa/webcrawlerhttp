@@ -1,0 +1,15 @@
+{
+  "name": "webcrawlerhttp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "jest"
+  },
+  "repository": "git@github.com:H4mxa/webcrawlerhttp.git",
+  "author": "h4mxa <duke80800@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.6.4"
+  }
+}

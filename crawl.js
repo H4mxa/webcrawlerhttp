@@ -68,15 +68,12 @@ function getURLsFromHTML(htmlBody, baseURL) {
       }
     } else {
       // absolute
-      if(!linkElement.href.includes('/'))
-      {
 
-        continue
-      }
       try {
         const urlObj = new URL(linkElement.href)
         urls.push(urlObj.href)
       } catch (error) {
+        console.log(linkElement)
         console.log(`error with absolute url: ${error.message}`)
         console.log('Link is a file wiht name: ', linkElement.href)
       }

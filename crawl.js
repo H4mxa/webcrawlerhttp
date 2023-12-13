@@ -1,7 +1,7 @@
 const { JSDOM } = require('jsdom')
 const fetch = require('node-fetch')
 
-async function crawlPage(baseURL, currentURL, pages, err) {
+async function crawlPage(baseURL, currentURL, pages) {
   const baseURLObj = new URL(baseURL)
   const currentURLObj = new URL(currentURL)
   if (baseURLObj.hostname !== currentURLObj.hostname) {
@@ -21,7 +21,7 @@ async function crawlPage(baseURL, currentURL, pages, err) {
 
   try {
     const respone = await fetch(currentURL)
-    if (respone.status > 399 && err) {
+    if (respone.status > 399) {
       console.log(
         `error in fetch with status code: ${respone.status} on page: ${currentURL}`
       )
@@ -50,7 +50,7 @@ async function crawlPage(baseURL, currentURL, pages, err) {
   return pages
 }
 
-function getURLsFromHTML(htmlBody, baseURL, errors) {
+function getURLsFromHTML(htmlBody, baseURL) {
   const urls = []
   const dom = new JSDOM(htmlBody)
   const linkElements = dom.window.document.querySelectorAll('a')
@@ -59,7 +59,7 @@ function getURLsFromHTML(htmlBody, baseURL, errors) {
       continue
     } else if (linkElement.href.slice(0, 1) === '/') {
       // relative
-      
+
       try {
         const urlObj = new URL(`${baseURL}${linkElement.href}`)
         urls.push(urlObj.href)

@@ -9,11 +9,9 @@
   "repository": "git@github.com:H4mxa/webcrawlerhttp.git",
   "author": "h4mxa <duke80800@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "jest": "^29.6.4"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "jsdom": "^22.1.0",
+    "jsdom": "^23.0.1",
     "node-fetch": "2"
   }
 }

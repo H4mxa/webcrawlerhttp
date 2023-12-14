@@ -1,7 +1,7 @@
 const { crawlPage } = require('./crawl')
 const { printReport } = require('./report.js')
 
-let options = {}
+let flages = { supressErrors: false, fileOutput: false, recordOnly: false }
 
 async function main() {
   if (process.argv.length < 3) {
@@ -15,20 +15,24 @@ async function main() {
   if (process.argv.includes('-h') || process.argv.includes('-H')) {
     console.log('usage node main.js websiteLink [options]')
     console.log('-h for help')
-    // console.log('-E to remove error')
+    console.log('-e to supress errors')
     console.log('-r to show report only')
     console.log('-f to record output in output.txt')
     process.exit(0)
   }
 
   if (process.argv.includes('-r')) {
-    options.recordOnly = true
+    flages.recordOnly = true
   }
 
   if (process.argv.includes('-f')) {
-    options.fileOutput = true
+    flages.fileOutput = true
   }
-  console.log(options)
+
+  if (process.argv.includes('-e')) {
+    flages.supressErrors = true
+  }
+
   const baseURL = process.argv[2]
 
   console.log(`starting crawl of ${baseURL}`)

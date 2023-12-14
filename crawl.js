@@ -59,23 +59,26 @@ function getURLsFromHTML(htmlBody, baseURL) {
       continue
     } else if (linkElement.href.slice(0, 1) === '/') {
       // relative
-
       try {
         const urlObj = new URL(`${baseURL}${linkElement.href}`)
         urls.push(urlObj.href)
       } catch (error) {
-        console.log(`error with relative url: ${error.message}`)
+        if (flags.supressErrors) {
+          console.log(`error with relative url: ${error.message}`)
+          console.log('Link is a file wiht name: ', linkElement.href)
+        }
       }
     } else {
       // absolute
-
       try {
         const urlObj = new URL(linkElement.href)
         urls.push(urlObj.href)
       } catch (error) {
-        console.log(linkElement)
-        console.log(`error with absolute url: ${error.message}`)
-        console.log('Link is a file wiht name: ', linkElement.href)
+        // console.log(linkElement)
+        if (flags.supressErrors) {
+          console.log(`error with absolute url: ${error.message}`)
+          console.log('Link is a file wiht name: ', linkElement.href)
+        }
       }
     }
   }

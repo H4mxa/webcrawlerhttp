@@ -1,7 +1,7 @@
 const { crawlPage } = require('./crawl')
 const { printReport } = require('./report.js')
 
-let flages = { supressErrors: false, fileOutput: false, recordOnly: false }
+let { flags } = require('./crawl.js')
 
 async function main() {
   if (process.argv.length < 3) {
@@ -22,15 +22,15 @@ async function main() {
   }
 
   if (process.argv.includes('-r')) {
-    flages.recordOnly = true
+    flags.recordOnly = true
   }
 
   if (process.argv.includes('-f')) {
-    flages.fileOutput = true
+    flags.fileOutput = true
   }
 
   if (process.argv.includes('-e')) {
-    flages.supressErrors = true
+    flags.supressErrors = true
   }
 
   const baseURL = process.argv[2]

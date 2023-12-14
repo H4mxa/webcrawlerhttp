@@ -1,6 +1,8 @@
 const { JSDOM } = require('jsdom')
 const fetch = require('node-fetch')
 
+let flags = { supressErrors: false, fileOutput: false, recordOnly: false }
+
 async function crawlPage(baseURL, currentURL, pages) {
   const baseURLObj = new URL(baseURL)
   const currentURLObj = new URL(currentURL)
@@ -23,7 +25,7 @@ async function crawlPage(baseURL, currentURL, pages) {
 
   try {
     const respone = await fetch(currentURL)
-    if (respone.status > 399) {
+    if (respone.status > 399 && !flags.recordOnly) {
       console.log(
         `error in fetch with status code: ${respone.status} on page: ${currentURL}`
       )
@@ -31,7 +33,7 @@ async function crawlPage(baseURL, currentURL, pages) {
     }
 
     const contentType = respone.headers.get('Content-Type')
-    if (!contentType.includes('text/html')) {
+    if (!contentType.includes('text/html') && !flags.recordOnly) {
       console.log(
         `Non html reponse, content type: ${contentType} on page: ${currentURL}`
       )
@@ -100,4 +102,5 @@ module.exports = {
   normalizeURL,
   getURLsFromHTML,
   crawlPage,
+  flags,
 }

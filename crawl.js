@@ -17,7 +17,9 @@ async function crawlPage(baseURL, currentURL, pages) {
 
   pages[normalizedCurrentURL] = 1
 
-  console.log(`actively crawling: ${currentURL}`)
+  if (!flags.recordOnly) {
+    console.log(`actively crawling: ${currentURL}`)
+  }
 
   try {
     const respone = await fetch(currentURL)
